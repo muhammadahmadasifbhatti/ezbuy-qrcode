@@ -128,3 +128,15 @@
     @apply font-sans;
   }
 }
+
+@media print {
+  body {
+    margin: 0;
+    padding: 0;
+    background: white;
+  }
+  @page {
+    margin: 0;
+    size: 60mm 30mm;
+  }
+}
