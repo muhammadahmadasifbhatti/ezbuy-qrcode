@@ -136,8 +136,8 @@
     background: white;
   }
   @page {
-    margin: 2mm;
-    size: 60mm 30mm;
+    margin: 0;
+    size: 2.4in 1.5in;
   }
   [data-slot="price-tag"] {
     width: 100% !important;

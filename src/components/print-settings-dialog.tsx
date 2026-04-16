@@ -27,7 +27,7 @@ function injectPrintStyles(w: number, h: number, unit: string) {
   const style = document.createElement("style");
   style.id = STYLE_ID;
   style.textContent = [
-    `@page { size: ${w}${unit} ${h}${unit}; margin: 2mm; }`,
+    `@page { size: ${w}${unit} ${h}${unit} !important; margin: 0 !important; }`,
     `@media print {`,
     `  [data-slot="dialog-overlay"],`,
     `  [data-slot="dialog-content"] { display: none !important; }`,
@@ -42,9 +42,9 @@ function removePrintStyles() {
 
 export function PrintSettingsDialog() {
   const [open, setOpen] = useState(false);
-  const [unit, setUnit] = useState<string>("mm");
-  const [width, setWidth] = useState("60");
-  const [height, setHeight] = useState("30");
+  const [unit, setUnit] = useState<string>("in");
+  const [width, setWidth] = useState("2.4");
+  const [height, setHeight] = useState("1.5");
 
   const handlePrint = useCallback(() => {
     const w = parseFloat(width);
