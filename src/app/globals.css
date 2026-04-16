@@ -136,7 +136,16 @@
     background: white;
   }
   @page {
-    margin: 0;
+    margin: 2mm;
     size: 60mm 30mm;
+  }
+  [data-slot="price-tag"] {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+  [data-slot="price-tag"] svg {
+    max-width: 100% !important;
+    height: auto !important;
   }
 }
