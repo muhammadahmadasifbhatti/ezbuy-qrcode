@@ -12,11 +12,19 @@ interface PriceTagBarcodeProps {
   styles: Pick<PriceTagStyles, "barcodeContainer" | "barcodeImage">;
 }
 
-export function PriceTagBarcode({ value, format, config, styles }: PriceTagBarcodeProps) {
-  const barcode = useMemo(() => generateBarcode(value, format), [value, format]);
+export function PriceTagBarcode({
+  value,
+  format,
+  config,
+  styles,
+}: PriceTagBarcodeProps) {
+  const barcode = useMemo(
+    () => generateBarcode(value, format),
+    [value, format],
+  );
   const barcodeSize = {
     width: mmToPoints(config.width - config.padding * 2),
-    height: mmToPoints(12),
+    height: mmToPoints(8),
   };
 
   return (

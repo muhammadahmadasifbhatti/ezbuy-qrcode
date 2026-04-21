@@ -28,10 +28,14 @@ interface PrintSizeDialogProps {
   onCancel: () => void;
 }
 
-export function PrintSizeDialog({ open, onConfirm, onCancel }: PrintSizeDialogProps) {
+export function PrintSizeDialog({
+  open,
+  onConfirm,
+  onCancel,
+}: PrintSizeDialogProps) {
   const [unit, setUnit] = useState<"mm" | "inches">("mm");
-  const [width, setWidth] = useState("60");
-  const [height, setHeight] = useState("40");
+  const [width, setWidth] = useState("62");
+  const [height, setHeight] = useState("26");
 
   const handleConfirm = () => {
     const w = parseFloat(width);
@@ -44,17 +48,27 @@ export function PrintSizeDialog({ open, onConfirm, onCancel }: PrintSizeDialogPr
   };
 
   return (
-    <Dialog open={open} onOpenChange={(nextOpen) => { if (!nextOpen) onCancel(); }}>
+    <Dialog
+      open={open}
+      onOpenChange={(nextOpen) => {
+        if (!nextOpen) onCancel();
+      }}
+    >
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Print Size</DialogTitle>
-          <DialogDescription>Choose the dimensions for your price tag.</DialogDescription>
+          <DialogDescription>
+            Choose the dimensions for your price tag.
+          </DialogDescription>
         </DialogHeader>
 
         <div className="flex flex-col gap-4 py-2">
           <div className="flex flex-col gap-1.5">
             <Label>Unit</Label>
-            <Select value={unit} onValueChange={(val) => setUnit(val as "mm" | "inches")}>
+            <Select
+              value={unit}
+              onValueChange={(val) => setUnit(val as "mm" | "inches")}
+            >
               <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
