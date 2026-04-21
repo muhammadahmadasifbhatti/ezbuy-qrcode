@@ -2,6 +2,8 @@ import { StyleSheet } from "@react-pdf/renderer";
 import type { PriceTagConfig } from "@/features/price-tag/types";
 import { mmToPoints } from "@/features/price-tag/utils/mmToPoints";
 
+export type PriceTagStyles = ReturnType<typeof createPriceTagStyles>;
+
 export function createPriceTagStyles(config: PriceTagConfig) {
   return StyleSheet.create({
     page: {

@@ -1,10 +1,7 @@
 import { Text, View } from "@react-pdf/renderer";
+import type { PriceTagStyles } from "@/features/price-tag/components/PriceTagStyles";
 
-interface RowStyles {
-  row: object;
-  label: object;
-  value: object;
-}
+type RowStyles = Pick<PriceTagStyles, "row" | "label" | "value">;
 
 function Row({ label, value, styles }: { label: string; value: string; styles: RowStyles }) {
   return (

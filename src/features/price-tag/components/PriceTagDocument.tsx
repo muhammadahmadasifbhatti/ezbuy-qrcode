@@ -13,7 +13,7 @@ export function PriceTagDocument({
   config,
 }: PriceTagProps) {
   const styles = createPriceTagStyles(config);
-  const pageSize = [mmToPoints(config.width), mmToPoints(config.height)] as const;
+  const pageSize: [number, number] = [mmToPoints(config.width), mmToPoints(config.height)];
 
   return (
     <Document>
