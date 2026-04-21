@@ -128,24 +128,3 @@
     @apply font-sans;
   }
 }
-
-@media print {
-  body {
-    margin: 0;
-    padding: 0;
-    background: white;
-  }
-  @page {
-    margin: 0;
-    size: 2.4in 1.5in;
-  }
-  [data-slot="price-tag"] {
-    width: 100% !important;
-    box-sizing: border-box !important;
-    overflow: hidden !important;
-  }
-  [data-slot="price-tag"] svg {
-    max-width: 100% !important;
-    height: auto !important;
-  }
-}

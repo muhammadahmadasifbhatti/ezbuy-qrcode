@@ -1,37 +1,49 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import { PriceTag } from "@/components/price-tag";
+import { useSearchParams } from "next/navigation";
 import { BackButton } from "@/components/back-button";
-import { PrintSettingsDialog } from "@/components/print-settings-dialog";
+import {
+  DEFAULT_PRICE_TAG_CONFIG,
+  PriceTagDownloadButton,
+  PriceTagPDFViewer,
+} from "@/features/price-tag";
 
 function PrintContent() {
   const searchParams = useSearchParams();
-  const imei = searchParams.get("imei") ?? "";
-  const modelNo = searchParams.get("modelNo") ?? "";
-  const condition = searchParams.get("condition") ?? "";
+  const barcodeValue = searchParams.get("imei") ?? "";
+  const productName = searchParams.get("modelNo") ?? "";
+  const price = Number(searchParams.get("price") ?? "0");
+  const currency = searchParams.get("currency") ?? "$";
 
-  if (!imei || !modelNo) {
-    return (
-      <p className="text-sm text-muted-foreground">Missing IMEI or Model No.</p>
-    );
+  if (!barcodeValue || !productName) {
+    return <p className="text-sm text-muted-foreground">Missing IMEI or Model No.</p>;
   }
 
-  return <PriceTag imei={imei} modelNo={modelNo} condition={condition} />;
+  const props = {
+    barcodeValue,
+    productName,
+    price,
+    currency,
+    config: DEFAULT_PRICE_TAG_CONFIG,
+  };
+
+  return (
+    <div className="flex w-full max-w-3xl flex-col gap-4">
+      <PriceTagPDFViewer {...props} />
+      <PriceTagDownloadButton {...props} />
+    </div>
+  );
 }
 
 export default function PrintPage() {
   return (
-    <div className="flex items-start justify-center min-h-screen bg-white p-4 print:p-0 print:m-0 print:block print:min-h-0">
-      <div className="relative flex flex-col items-center">
+    <div className="flex min-h-screen items-start justify-center bg-white p-4">
+      <div className="relative flex w-full flex-col items-center gap-4">
         <BackButton />
-        <Suspense
-          fallback={<p className="text-sm text-muted-foreground">Loading...</p>}
-        >
+        <Suspense fallback={<p className="text-sm text-muted-foreground">Loading...</p>}>
           <PrintContent />
         </Suspense>
-        <PrintSettingsDialog />
       </div>
     </div>
   );
