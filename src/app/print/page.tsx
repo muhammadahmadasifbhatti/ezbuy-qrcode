@@ -11,7 +11,7 @@ import {
 import type { PriceTagConfig } from "@/features/price-tag";
 import { PrintSizeDialog } from "@/features/price-tag/components/PrintSizeDialog";
 
-const DEFAULT_PADDING = 3;
+const DEFAULT_PADDING = 2;
 
 function PrintContent() {
   const searchParams = useSearchParams();
@@ -23,7 +23,9 @@ function PrintContent() {
   const [config, setConfig] = useState<PriceTagConfig | null>(null);
 
   if (!imei || !modelNo) {
-    return <p className="text-sm text-muted-foreground">Missing IMEI or Model No.</p>;
+    return (
+      <p className="text-sm text-muted-foreground">Missing IMEI or Model No.</p>
+    );
   }
 
   const handleConfirm = (widthMm: number, heightMm: number) => {
@@ -53,7 +55,14 @@ function PrintContent() {
       <PriceTagPDFViewer {...props} />
       <div className="flex gap-2">
         <PriceTagDownloadButton {...props} />
-        <Button variant="outline" size="sm" onClick={() => { setConfig(null); setDialogOpen(true); }}>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => {
+            setConfig(null);
+            setDialogOpen(true);
+          }}
+        >
           Change Size
         </Button>
       </div>
@@ -66,7 +75,9 @@ export default function PrintPage() {
     <div className="flex min-h-screen items-start justify-center bg-white p-4">
       <div className="relative flex w-full flex-col items-center gap-4">
         <BackButton />
-        <Suspense fallback={<p className="text-sm text-muted-foreground">Loading...</p>}>
+        <Suspense
+          fallback={<p className="text-sm text-muted-foreground">Loading...</p>}
+        >
           <PrintContent />
         </Suspense>
       </div>

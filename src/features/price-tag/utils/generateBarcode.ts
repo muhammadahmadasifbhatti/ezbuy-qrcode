@@ -20,7 +20,7 @@ export function generateBarcode(
       bcid: format,
       text: value,
       scale: 2,
-      height: 8,
+      height: 6,
       includetext: false,
       ...options,
     });
