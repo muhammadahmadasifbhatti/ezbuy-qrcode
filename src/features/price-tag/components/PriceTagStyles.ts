@@ -8,18 +8,18 @@ export function createPriceTagStyles(config: PriceTagConfig) {
       padding: mmToPoints(config.padding),
       backgroundColor: "#ffffff",
     },
-    body: {
+    row: {
       display: "flex",
-      flexDirection: "column",
-      gap: mmToPoints(1),
+      flexDirection: "row",
+      marginBottom: mmToPoints(0.5),
     },
-    productName: {
-      fontSize: mmToPoints(1.6),
+    label: {
+      fontSize: mmToPoints(1.4),
       fontWeight: 700,
     },
-    price: {
-      fontSize: mmToPoints(2.2),
-      fontWeight: 700,
+    value: {
+      fontSize: mmToPoints(1.4),
+      fontWeight: 400,
     },
     barcodeContainer: {
       marginTop: mmToPoints(1),

@@ -1,37 +1,62 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { BackButton } from "@/components/back-button";
+import { Button } from "@/components/ui/button";
 import {
-  DEFAULT_PRICE_TAG_CONFIG,
   PriceTagDownloadButton,
   PriceTagPDFViewer,
 } from "@/features/price-tag";
+import type { PriceTagConfig } from "@/features/price-tag";
+import { PrintSizeDialog } from "@/features/price-tag/components/PrintSizeDialog";
+
+const DEFAULT_PADDING = 3;
 
 function PrintContent() {
   const searchParams = useSearchParams();
-  const barcodeValue = searchParams.get("imei") ?? "";
-  const productName = searchParams.get("modelNo") ?? "";
-  const price = Number(searchParams.get("price") ?? "0");
-  const currency = searchParams.get("currency") ?? "$";
+  const imei = searchParams.get("imei") ?? "";
+  const modelNo = searchParams.get("modelNo") ?? "";
+  const condition = searchParams.get("condition") ?? undefined;
 
-  if (!barcodeValue || !productName) {
+  const [dialogOpen, setDialogOpen] = useState(true);
+  const [config, setConfig] = useState<PriceTagConfig | null>(null);
+
+  if (!imei || !modelNo) {
     return <p className="text-sm text-muted-foreground">Missing IMEI or Model No.</p>;
   }
 
-  const props = {
-    barcodeValue,
-    productName,
-    price,
-    currency,
-    config: DEFAULT_PRICE_TAG_CONFIG,
+  const handleConfirm = (widthMm: number, heightMm: number) => {
+    setConfig({ width: widthMm, height: heightMm, padding: DEFAULT_PADDING });
+    setDialogOpen(false);
   };
+
+  if (!config) {
+    return (
+      <>
+        <PrintSizeDialog
+          open={dialogOpen}
+          onConfirm={handleConfirm}
+          onCancel={() => setDialogOpen(true)}
+        />
+        <p className="text-sm text-muted-foreground">
+          Choose a print size to continue.
+        </p>
+      </>
+    );
+  }
+
+  const props = { imei, modelNo, condition, config };
 
   return (
     <div className="flex w-full max-w-3xl flex-col gap-4">
       <PriceTagPDFViewer {...props} />
-      <PriceTagDownloadButton {...props} />
+      <div className="flex gap-2">
+        <PriceTagDownloadButton {...props} />
+        <Button variant="outline" size="sm" onClick={() => { setConfig(null); setDialogOpen(true); }}>
+          Change Size
+        </Button>
+      </div>
     </div>
   );
 }

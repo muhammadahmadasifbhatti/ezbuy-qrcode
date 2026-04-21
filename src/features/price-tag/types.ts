@@ -5,10 +5,9 @@ export interface PriceTagConfig {
 }
 
 export interface PriceTagProps {
-  productName: string;
-  price: number;
-  currency: string;
-  barcodeValue: string;
+  imei: string;
+  modelNo: string;
+  condition?: string;
   barcodeFormat?: string;
   config: PriceTagConfig;
 }
