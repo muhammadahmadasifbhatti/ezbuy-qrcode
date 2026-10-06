@@ -1,4 +1,4 @@
-import { Document, Page } from "@react-pdf/renderer";
+import { Document, Page, View } from "@react-pdf/renderer";
 import { ImeiRow, DetailRows } from "@/features/price-tag/components/PriceTagBody";
 import { PriceTagBarcode } from "@/features/price-tag/components/PriceTagBarcode";
 import { createPriceTagStyles } from "@/features/price-tag/components/PriceTagStyles";
@@ -18,14 +18,17 @@ export function PriceTagDocument({
   return (
     <Document>
       <Page size={pageSize} style={styles.page}>
-        <ImeiRow imei={imei} styles={styles} />
-        <PriceTagBarcode
-          value={imei}
-          format={barcodeFormat}
-          config={config}
-          styles={styles}
-        />
-        <DetailRows modelNo={modelNo} condition={condition} styles={styles} />
+        {/* One label per page: clip anything that doesn't fit instead of
+            spilling onto a second label. */}
+        <View style={styles.content} wrap={false}>
+          <ImeiRow imei={imei} styles={styles} />
+          <PriceTagBarcode
+            value={imei}
+            format={barcodeFormat}
+            styles={styles}
+          />
+          <DetailRows modelNo={modelNo} condition={condition} styles={styles} />
+        </View>
       </Page>
     </Document>
   );

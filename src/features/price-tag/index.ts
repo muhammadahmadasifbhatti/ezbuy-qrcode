@@ -1,12 +1,9 @@
-import type { PriceTagConfig } from "@/features/price-tag/types";
-
-export { PriceTagDocument } from "@/features/price-tag/components/PriceTagDocument";
-export { PriceTagDownloadButton } from "@/features/price-tag/PriceTagDownloadButton";
-export { PriceTagPDFViewer } from "@/features/price-tag/PriceTagPDFViewer";
+export { PriceTagPreview } from "@/features/price-tag/PriceTagPreview";
+export { printPriceTag } from "@/features/price-tag/printPriceTag";
+export {
+  DEFAULT_LABEL_SIZE,
+  LABEL_SIZES,
+  labelSizeToConfig,
+} from "@/features/price-tag/layout";
+export type { LabelSize } from "@/features/price-tag/layout";
 export type { PriceTagConfig, PriceTagProps } from "@/features/price-tag/types";
-
-export const DEFAULT_PRICE_TAG_CONFIG: PriceTagConfig = {
-  width: 60,
-  height: 40,
-  padding: 3,
-};
