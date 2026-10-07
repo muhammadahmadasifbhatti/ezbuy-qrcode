@@ -67,7 +67,12 @@ export function PriceTagPreview({
             <span style={textStyle}>{imei}</span>
           </div>
 
-          <div style={{ marginTop: mm(TAG_LAYOUT.barcodeMarginTop) }}>
+          <div
+            style={{
+              marginTop: mm(TAG_LAYOUT.barcodeMarginTop),
+              paddingRight: mm(TAG_LAYOUT.barcodeRightMargin),
+            }}
+          >
             {barcode ? (
               // eslint-disable-next-line @next/next/no-img-element -- data URL
               <img

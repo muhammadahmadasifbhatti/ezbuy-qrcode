@@ -53,9 +53,12 @@ export function createPriceTagStyles(config: PriceTagConfig) {
     },
     barcodeContainer: {
       marginTop: mmToPoints(TAG_LAYOUT.barcodeMarginTop),
+      paddingRight: mmToPoints(TAG_LAYOUT.barcodeRightMargin),
     },
     barcodeImage: {
-      width: mmToPoints(config.width - config.padding * 2),
+      width: mmToPoints(
+        config.width - config.padding * 2 - TAG_LAYOUT.barcodeRightMargin,
+      ),
       height: mmToPoints(TAG_LAYOUT.barcodeHeight),
       objectFit: "contain",
     },

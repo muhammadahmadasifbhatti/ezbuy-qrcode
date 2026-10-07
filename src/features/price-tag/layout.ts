@@ -13,6 +13,10 @@ export const TAG_LAYOUT = {
   rowGap: 0.5,
   barcodeMarginTop: 1,
   barcodeHeight: 8,
+  /** Blank space to the right of the barcode so it stays left-aligned with
+   *  the text but its last bars end well before the label edge, where thermal
+   *  printers print faintly. */
+  barcodeRightMargin: 6,
 } as const;
 
 export interface LabelSize {
