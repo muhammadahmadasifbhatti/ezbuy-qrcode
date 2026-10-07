@@ -27,7 +27,7 @@ const sizeItems = Object.fromEntries(
 
 export function PriceTagGenerator() {
   const [sizeId, setSizeId] = useState(DEFAULT_LABEL_SIZE.id);
-  const [imei, setImei] = useState("");
+  const [serial, setSerial] = useState("");
   const [modelNo, setModelNo] = useState("");
   const [condition, setCondition] = useState("");
   const [printing, setPrinting] = useState(false);
@@ -42,12 +42,12 @@ export function PriceTagGenerator() {
   );
 
   const tag = {
-    imei: imei.trim(),
+    serial: serial.trim(),
     modelNo: modelNo.trim(),
     condition: condition.trim() || undefined,
     config,
   };
-  const canPrint = Boolean(tag.imei && tag.modelNo);
+  const canPrint = Boolean(tag.serial && tag.modelNo);
 
   const handlePrint = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,15 +93,14 @@ export function PriceTagGenerator() {
             </Select>
           </div>
           <div className="flex flex-col gap-1.5">
-            <Label htmlFor="imei">IMEI Number</Label>
+            <Label htmlFor="serial">Serial Number</Label>
             <Input
-              id="imei"
+              id="serial"
               type="text"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              placeholder="354879049278269"
-              value={imei}
-              onChange={(e) => setImei(e.target.value)}
+              autoCapitalize="characters"
+              placeholder="e.g. F2LXK1ABCD7Q"
+              value={serial}
+              onChange={(e) => setSerial(e.target.value)}
               required
             />
           </div>
@@ -146,7 +145,7 @@ export function PriceTagGenerator() {
             </Button>
             {!canPrint ? (
               <p className="text-xs text-muted-foreground">
-                Enter an IMEI and Model No to print.
+                Enter a Serial and Model No to print.
               </p>
             ) : null}
             {printError ? (

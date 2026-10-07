@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "EzBuy - Price Tag Generator",
-  description: "Generate printable price tags with IMEI barcodes",
+  description: "Generate printable price tags with serial number barcodes",
 };
 
 export default function RootLayout({

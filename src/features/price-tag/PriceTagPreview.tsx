@@ -29,15 +29,15 @@ const rowStyle: CSSProperties = {
  * (TAG_LAYOUT) and barcode image as the PDF, rendered at actual size.
  */
 export function PriceTagPreview({
-  imei,
+  serial,
   modelNo,
   condition,
   barcodeFormat = "code128",
   config,
 }: PriceTagProps) {
   const barcode = useMemo(
-    () => (imei ? generateBarcode(imei, barcodeFormat) : null),
-    [imei, barcodeFormat],
+    () => (serial ? generateBarcode(serial, barcodeFormat) : null),
+    [serial, barcodeFormat],
   );
 
   const labelRef = useRef<HTMLDivElement>(null);
@@ -45,7 +45,7 @@ export function PriceTagPreview({
   useLayoutEffect(() => {
     const el = labelRef.current;
     if (el) setOverflows(el.scrollHeight > el.clientHeight + 1);
-  }, [imei, modelNo, condition, config, barcode]);
+  }, [serial, modelNo, condition, config, barcode]);
 
   return (
     <div className="flex flex-col gap-2">
@@ -63,8 +63,8 @@ export function PriceTagPreview({
           }
         >
           <div style={rowStyle}>
-            <span style={{ ...textStyle, fontWeight: 700 }}>IMEI: </span>
-            <span style={textStyle}>{imei}</span>
+            <span style={{ ...textStyle, fontWeight: 700 }}>Serial: </span>
+            <span style={textStyle}>{serial}</span>
           </div>
 
           <div
@@ -77,12 +77,12 @@ export function PriceTagPreview({
               // eslint-disable-next-line @next/next/no-img-element -- data URL
               <img
                 src={barcode}
-                alt={`Barcode for ${imei}`}
+                alt={`Barcode for ${serial}`}
                 className="block w-full object-contain"
                 style={{ height: mm(TAG_LAYOUT.barcodeHeight) }}
               />
-            ) : imei ? (
-              <span style={textStyle}>{imei}</span>
+            ) : serial ? (
+              <span style={textStyle}>{serial}</span>
             ) : (
               <div
                 className="rounded-[2px] border border-dashed border-black/25"

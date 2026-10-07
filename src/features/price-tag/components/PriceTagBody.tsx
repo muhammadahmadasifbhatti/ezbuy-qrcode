@@ -42,8 +42,8 @@ function ConditionRow({
   );
 }
 
-export function ImeiRow({ imei, styles }: { imei: string; styles: RowStyles }) {
-  return <Row label="IMEI" value={imei} styles={styles} />;
+export function SerialRow({ serial, styles }: { serial: string; styles: RowStyles }) {
+  return <Row label="Serial" value={serial} styles={styles} />;
 }
 
 export function DetailRows({

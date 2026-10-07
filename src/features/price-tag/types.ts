@@ -5,7 +5,7 @@ export interface PriceTagConfig {
 }
 
 export interface PriceTagProps {
-  imei: string;
+  serial: string;
   modelNo: string;
   condition?: string;
   barcodeFormat?: string;
